@@ -94,6 +94,8 @@ class HomeScreen extends StatelessWidget {
               Theme.of(context).colorScheme.secondary.withOpacity(0.1),
               Theme.of(context).colorScheme.surface,
             ],
+           
+
           ),
         ),
         child: SingleChildScrollView(
