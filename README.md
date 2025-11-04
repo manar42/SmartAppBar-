@@ -1,4 +1,4 @@
-[![Watch Demo](https://raw.githubusercontent.com/manar42/SmartAppBar-/c80923d95fb4b44d4e4ec795350bfff5834ad7df/assets/videos/demo_thumbnail.png)](https://raw.githubusercontent.com/manar42/SmartAppBar-/c80923d95fb4b44d4e4ec795350bfff5834ad7df/assets/videos/Video.mp4)
+[![Watch Demo](https://raw.githubusercontent.com/username/repo/main/assets/videos/demo_thumbnail.png)](https://raw.githubusercontent.com/username/repo/main/assets/videos/Video.mp4)
 
 
  
