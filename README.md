@@ -1,3 +1,6 @@
+https://raw.githubusercontent.com/manar42/SmartAppBar-/c80923d95fb4b44d4e4ec795350bfff5834ad7df/assets/videos/Video.mp4
+
+ 
 # SmartAppBar - Intelligent Flutter AppBar Widget
 
 A powerful, dynamic, and intelligent SmartAppBar widget for Flutter applications that automatically adapts to routes, supports multiple visual variants, and provides rich accessibility features.
