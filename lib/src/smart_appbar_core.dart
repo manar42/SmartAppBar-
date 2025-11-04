@@ -442,7 +442,7 @@ class _SmartAppBarState extends State<SmartAppBar>
   double _getAppBarHeight(SmartAppBarVariant variant) {
     switch (variant) {
       case SmartAppBarVariant.large:
-        return 88.0;
+        return 88;
       default:
         return kToolbarHeight;
     }
@@ -703,4 +703,5 @@ class _SmartAppBarState extends State<SmartAppBar>
       // Note: Color caching removed for now, can be re-added for performance optimization
     }
   }
+
 }

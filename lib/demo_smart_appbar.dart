@@ -444,20 +444,20 @@ class DashboardScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildActivityItem(String activity, String time) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4.0),
-      child: Row(
-        children: [
-          const Icon(Icons.circle, size: 8, color: Colors.green),
-          const SizedBox(width: 12),
-          Expanded(child: Text(activity)),
-          Text(
-            time,
-            style: const TextStyle(color: Colors.grey, fontSize: 12),
-          ),
-        ],
-      ),
-    );
-  }
+  // Widget _buildActivityItem(String activity, String time) {
+  //   return Padding(
+  //     padding: const EdgeInsets.symmetric(vertical: 4.0),
+  //     child: Row(
+  //       children: [
+  //         const Icon(Icons.circle, size: 8, color: Colors.green),
+  //         const SizedBox(width: 12),
+  //         Expanded(child: Text(activity)),
+  //         Text(
+  //           time,
+  //           style: const TextStyle(color: Colors.grey, fontSize: 12),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 }
