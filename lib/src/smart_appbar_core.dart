@@ -47,55 +47,55 @@ const Map<String, _RouteConfig> _routeConfigs = {
 class SmartAppBar extends StatefulWidget implements PreferredSizeWidget {
   /// Optional custom title (if not provided, will be determined by route)
   final String? title;
-   
+
   /// Optional custom actions (if not provided, will be determined by route)
   final List<SmartAppBarAction>? actions;
-   
+
   /// Optional custom variant (if not provided, will be determined by route)
   final SmartAppBarVariant? variant;
-   
+
   /// Whether to center the title
   final bool centerTitle;
-   
+
   /// Custom background color override
   final Color? backgroundColor;
-   
+
   /// Custom foreground (text/icon) color override
   final Color? foregroundColor;
-   
+
   /// Custom elevation for elevated variants
   final double elevation;
-   
+
   /// Whether to show back button automatically
   final bool showBackButton;
-   
+
   /// Custom back button callback
   final VoidCallback? onBackPressed;
-   
+
   /// Whether to enable animations
   final bool enableAnimations;
-   
+
   /// Animation duration
   final Duration animationDuration;
-   
+
   /// Custom title padding
   final EdgeInsetsGeometry? titlePadding;
-   
+
   /// Whether to automatically infer leading widget
   final bool automaticallyImplyLeading;
-   
+
   /// Blur intensity for glass effects (0.0 to 1.0)
   final double blurIntensity;
-   
+
   /// Whether to enable gradient backgrounds
   final bool enableGradient;
-   
+
   /// Loading state indicator
   final bool isLoading;
-   
+
   /// Custom loading icon
   final IconData? loadingIcon;
-   
+
   /// Create a SmartAppBar with automatic route-based configuration
   ///
   /// Only specify parameters you want to override. Everything else is automatic.
@@ -130,48 +130,49 @@ class SmartAppBar extends StatefulWidget implements PreferredSizeWidget {
   static _RouteConfig? getRouteConfig(BuildContext context) {
     final routeName = ModalRoute.of(context)?.settings.name;
     if (routeName == null) return null;
-    
+
     // Find exact match first
     if (_routeConfigs.containsKey(routeName)) {
       return _routeConfigs[routeName];
     }
-    
+
     // Find partial match
     for (final entry in _routeConfigs.entries) {
-      if (routeName.contains(entry.key.substring(1))) { // Remove leading '/'
+      if (routeName.contains(entry.key.substring(1))) {
+        // Remove leading '/'
         return entry.value;
       }
     }
-    
+
     return null;
   }
 
   /// Get default configuration for unknown routes
   static _RouteConfig getDefaultConfig() => const _RouteConfig(
-    title: 'SmartApp',
-    variant: SmartAppBarVariant.standard,
-    actions: [SmartAppBarAction.more],
-    centerTitle: false,
-  );
+        title: 'SmartApp',
+        variant: SmartAppBarVariant.standard,
+        actions: [SmartAppBarAction.more],
+        centerTitle: false,
+      );
 }
 
 /// App bar variants with different visual effects
 enum SmartAppBarVariant {
   /// Standard Material 3 app bar
   standard,
-  
+
   /// Glass morphism effect with blur
   glass,
-  
+
   /// Fully transparent background
   transparent,
-  
+
   /// Bordered appearance with subtle border
   bordered,
-  
+
   /// Elevated appearance with shadow
   elevated,
-  
+
   /// Large title app bar
   large,
 }
@@ -220,9 +221,9 @@ class _SmartAppBarState extends State<SmartAppBar>
   late Animation<double> _fadeAnimation;
   late Animation<double> _slideAnimation;
   late Animation<double> _scaleAnimation;
-  
+
   bool _isPressed = false;
-  
+
   // Cache for performance
   _RouteConfig? _cachedConfig;
   String? _cachedRouteName;
@@ -283,7 +284,7 @@ class _SmartAppBarState extends State<SmartAppBar>
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
     final routeConfig = _getEffectiveConfig();
-    
+
     // Cache expensive calculations
     _updateCaches(theme, isDark);
 
@@ -291,12 +292,13 @@ class _SmartAppBarState extends State<SmartAppBar>
       label: 'App Bar: ${routeConfig.title}',
       hint: _shouldShowBackButton() ? 'Contains back navigation button' : null,
       child: widget.enableAnimations
-        ? _buildAnimatedAppBar(context, routeConfig, isDark)
-        : _buildStaticAppBar(context, routeConfig, isDark),
+          ? _buildAnimatedAppBar(context, routeConfig, isDark)
+          : _buildStaticAppBar(context, routeConfig, isDark),
     );
   }
 
-  Widget _buildAnimatedAppBar(BuildContext context, _RouteConfig config, bool isDark) {
+  Widget _buildAnimatedAppBar(
+      BuildContext context, _RouteConfig config, bool isDark) {
     return AnimatedBuilder(
       animation: _animationController,
       builder: (context, child) {
@@ -314,7 +316,8 @@ class _SmartAppBarState extends State<SmartAppBar>
     );
   }
 
-  Widget _buildStaticAppBar(BuildContext context, _RouteConfig config, bool isDark) {
+  Widget _buildStaticAppBar(
+      BuildContext context, _RouteConfig config, bool isDark) {
     return Container(
       decoration: _buildDecoration(config, isDark),
       child: SafeArea(
@@ -338,11 +341,15 @@ class _SmartAppBarState extends State<SmartAppBar>
   }
 
   BoxDecoration _buildDecoration(_RouteConfig config, bool isDark) {
-    final backgroundColor = widget.backgroundColor ?? config.backgroundColor ?? _getDefaultBackgroundColor(config, isDark);
-    final foregroundColor = widget.foregroundColor ?? config.foregroundColor ?? _getDefaultForegroundColor(config, isDark);
-    
+    final backgroundColor = widget.backgroundColor ??
+        config.backgroundColor ??
+        _getDefaultBackgroundColor(config, isDark);
+    final foregroundColor = widget.foregroundColor ??
+        config.foregroundColor ??
+        _getDefaultForegroundColor(config, isDark);
+
     List<BoxShadow>? boxShadows;
-    
+
     switch (config.variant) {
       case SmartAppBarVariant.glass:
         // Glass morphism effect
@@ -361,10 +368,10 @@ class _SmartAppBarState extends State<SmartAppBar>
             ),
           ],
         );
-      
+
       case SmartAppBarVariant.transparent:
         return const BoxDecoration(color: Colors.transparent);
-      
+
       case SmartAppBarVariant.bordered:
         return BoxDecoration(
           color: backgroundColor,
@@ -373,7 +380,7 @@ class _SmartAppBarState extends State<SmartAppBar>
             width: 1.0,
           ),
         );
-      
+
       case SmartAppBarVariant.elevated:
         boxShadows = [
           BoxShadow(
@@ -383,10 +390,9 @@ class _SmartAppBarState extends State<SmartAppBar>
           ),
         ];
         break;
-      
+
       case SmartAppBarVariant.standard:
       case SmartAppBarVariant.large:
-      default:
         break;
     }
 
@@ -416,16 +422,19 @@ class _SmartAppBarState extends State<SmartAppBar>
       case SmartAppBarVariant.glass:
         // Use Material 3 surface colors for consistent appearance
         return isDark
-              ? Theme.of(context).colorScheme.surface.withValues(alpha: 0.8)
-              : Theme.of(context).colorScheme.surface.withValues(alpha: 0.8);
-        case SmartAppBarVariant.transparent:
-          return Colors.transparent;
-        case SmartAppBarVariant.elevated:
-          return Theme.of(context).colorScheme.surface;
-        case SmartAppBarVariant.large:
-          return Theme.of(context).colorScheme.primaryContainer.withValues(alpha: 0.3);
-        default:
-          return Theme.of(context).colorScheme.surface;
+            ? Theme.of(context).colorScheme.surface.withValues(alpha: 0.8)
+            : Theme.of(context).colorScheme.surface.withValues(alpha: 0.8);
+      case SmartAppBarVariant.transparent:
+        return Colors.transparent;
+      case SmartAppBarVariant.elevated:
+        return Theme.of(context).colorScheme.surface;
+      case SmartAppBarVariant.large:
+        return Theme.of(context)
+            .colorScheme
+            .primaryContainer
+            .withValues(alpha: 0.3);
+      default:
+        return Theme.of(context).colorScheme.surface;
     }
   }
 
@@ -433,10 +442,8 @@ class _SmartAppBarState extends State<SmartAppBar>
     if (config.variant == SmartAppBarVariant.transparent) {
       return isDark ? Colors.white : Colors.black87;
     }
-    
-    return isDark
-        ? const Color(0xFFE8EAED)
-        : const Color(0xFF1B1F23);
+
+    return isDark ? const Color(0xFFE8EAED) : const Color(0xFF1B1F23);
   }
 
   double _getAppBarHeight(SmartAppBarVariant variant) {
@@ -448,10 +455,14 @@ class _SmartAppBarState extends State<SmartAppBar>
     }
   }
 
-  Widget _buildTitleRow(BuildContext context, _RouteConfig config, bool isDark) {
+  Widget _buildTitleRow(
+      BuildContext context, _RouteConfig config, bool isDark) {
     final effectiveCenterTitle = widget.centerTitle || config.centerTitle;
-    final showLeading = _shouldShowBackButton() || widget.automaticallyImplyLeading;
-    final foregroundColor = widget.foregroundColor ?? config.foregroundColor ?? _getDefaultForegroundColor(config, isDark);
+    final showLeading =
+        _shouldShowBackButton() || widget.automaticallyImplyLeading;
+    final foregroundColor = widget.foregroundColor ??
+        config.foregroundColor ??
+        _getDefaultForegroundColor(config, isDark);
 
     return Row(
       mainAxisSize: MainAxisSize.min,
@@ -461,7 +472,8 @@ class _SmartAppBarState extends State<SmartAppBar>
           if (!effectiveCenterTitle) const SizedBox(width: 12),
         ],
         Expanded(
-          child: _buildTitleText(foregroundColor, effectiveCenterTitle, config.title),
+          child: _buildTitleText(
+              foregroundColor, effectiveCenterTitle, config.title),
         ),
       ],
     );
@@ -493,7 +505,8 @@ class _SmartAppBarState extends State<SmartAppBar>
                 widget.loadingIcon ?? Icons.arrow_back_ios_new,
                 color: foregroundColor,
               ),
-              onPressed: widget.onBackPressed ?? () => Navigator.of(context).pop(),
+              onPressed:
+                  widget.onBackPressed ?? () => Navigator.of(context).pop(),
               tooltip: 'Back',
               style: IconButton.styleFrom(
                 minimumSize: const Size(44, 44),
@@ -508,7 +521,8 @@ class _SmartAppBarState extends State<SmartAppBar>
     );
   }
 
-  Widget _buildTitleText(Color foregroundColor, bool centerTitle, String title) {
+  Widget _buildTitleText(
+      Color foregroundColor, bool centerTitle, String title) {
     if (widget.isLoading) {
       return Row(
         mainAxisSize: MainAxisSize.min,
@@ -558,20 +572,25 @@ class _SmartAppBarState extends State<SmartAppBar>
 
   Widget _buildActionsRow(List<SmartAppBarAction> actions, bool isDark) {
     final config = _getEffectiveConfig();
-    final foregroundColor = widget.foregroundColor ?? config.foregroundColor ?? _getDefaultForegroundColor(config, isDark);
+    final foregroundColor = widget.foregroundColor ??
+        config.foregroundColor ??
+        _getDefaultForegroundColor(config, isDark);
 
     return Row(
       mainAxisSize: MainAxisSize.min,
-      children: actions.map((action) =>
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 2),
-          child: _buildActionButton(action.icon, action, foregroundColor),
-        ),
-      ).toList(),
+      children: actions
+          .map(
+            (action) => Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 2),
+              child: _buildActionButton(action.icon, action, foregroundColor),
+            ),
+          )
+          .toList(),
     );
   }
 
-  Widget _buildActionButton(IconData icon, SmartAppBarAction action, Color foregroundColor) {
+  Widget _buildActionButton(
+      IconData icon, SmartAppBarAction action, Color foregroundColor) {
     return Semantics(
       label: _getActionLabel(action),
       hint: _getActionHint(action),
@@ -661,7 +680,7 @@ class _SmartAppBarState extends State<SmartAppBar>
 
   void _handleAction(SmartAppBarAction action) {
     HapticFeedback.lightImpact();
-    
+
     // In a real implementation, you might navigate to specific routes or call specific functions
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -675,19 +694,21 @@ class _SmartAppBarState extends State<SmartAppBar>
 
   bool _shouldShowBackButton() {
     return widget.showBackButton &&
-           Navigator.of(context).canPop() &&
-           (widget.variant == null || widget.variant != SmartAppBarVariant.large);
+        Navigator.of(context).canPop() &&
+        (widget.variant == null || widget.variant != SmartAppBarVariant.large);
   }
 
   _RouteConfig _getEffectiveConfig() {
-    final routeConfig = SmartAppBar.getRouteConfig(context) ?? SmartAppBar.getDefaultConfig();
-    
+    final routeConfig =
+        SmartAppBar.getRouteConfig(context) ?? SmartAppBar.getDefaultConfig();
+
     return _RouteConfig(
       title: widget.title ?? routeConfig.title,
       variant: widget.variant ?? routeConfig.variant,
       actions: widget.actions?.map((a) => a).toList() ?? routeConfig.actions,
       centerTitle: widget.centerTitle || routeConfig.centerTitle,
-      automaticallyImplyLeading: widget.automaticallyImplyLeading && routeConfig.automaticallyImplyLeading,
+      automaticallyImplyLeading: widget.automaticallyImplyLeading &&
+          routeConfig.automaticallyImplyLeading,
       backgroundColor: widget.backgroundColor ?? routeConfig.backgroundColor,
       foregroundColor: widget.foregroundColor ?? routeConfig.foregroundColor,
     );
@@ -696,12 +717,11 @@ class _SmartAppBarState extends State<SmartAppBar>
   void _updateCaches(ThemeData theme, bool isDark) {
     final routeName = ModalRoute.of(context)?.settings.name;
     final config = _getEffectiveConfig();
-    
+
     if (_cachedRouteName != routeName || _cachedConfig?.title != config.title) {
       _cachedRouteName = routeName;
       _cachedConfig = config;
       // Note: Color caching removed for now, can be re-added for performance optimization
     }
   }
-
 }

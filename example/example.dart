@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../lib/smart_appbar.dart';
+import 'package:smart_appbar/smart_appbar.dart';
 
 void main() {
   runApp(const SmartAppBarDemo());
@@ -46,7 +46,8 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const SmartAppBar(), // Automatic: transparent variant, title "Home 🏠", notifications + profile actions
+      appBar:
+          const SmartAppBar(), // Automatic: transparent variant, title "Home 🏠", notifications + profile actions
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
@@ -99,7 +100,8 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildNavigationCard(BuildContext context, String title, String route) {
+  Widget _buildNavigationCard(
+      BuildContext context, String title, String route) {
     return Card(
       elevation: 8,
       child: ListTile(
@@ -136,7 +138,8 @@ class PetProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const SmartAppBar(), // Automatic: glass variant, title "Pet Profile 🐾", edit + share actions
+      appBar:
+          const SmartAppBar(), // Automatic: glass variant, title "Pet Profile 🐾", edit + share actions
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
@@ -201,7 +204,8 @@ class PetProfileScreen extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
                     foregroundColor: Colors.purple,
-                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 24, vertical: 12),
                   ),
                 ),
               ],
@@ -219,7 +223,8 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const SmartAppBar(), // Automatic: bordered variant, title "Settings ⚙️", search + more actions
+      appBar:
+          const SmartAppBar(), // Automatic: bordered variant, title "Settings ⚙️", search + more actions
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: ListView(
@@ -230,18 +235,24 @@ class SettingsScreen extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             _buildSettingsSection('Account', [
-              _buildSettingsItem(Icons.person, 'Profile Settings', 'Manage your profile information'),
-              _buildSettingsItem(Icons.security, 'Privacy & Security', 'Control your data and privacy'),
+              _buildSettingsItem(Icons.person, 'Profile Settings',
+                  'Manage your profile information'),
+              _buildSettingsItem(Icons.security, 'Privacy & Security',
+                  'Control your data and privacy'),
             ]),
             const SizedBox(height: 20),
             _buildSettingsSection('Preferences', [
-              _buildSettingsItem(Icons.notifications, 'Notifications', 'Configure notification preferences'),
-              _buildSettingsItem(Icons.palette, 'Theme & Display', 'Customize appearance'),
+              _buildSettingsItem(Icons.notifications, 'Notifications',
+                  'Configure notification preferences'),
+              _buildSettingsItem(
+                  Icons.palette, 'Theme & Display', 'Customize appearance'),
             ]),
             const SizedBox(height: 20),
             _buildSettingsSection('About', [
-              _buildSettingsItem(Icons.info, 'App Information', 'Version and legal information'),
-              _buildSettingsItem(Icons.help, 'Help & Support', 'Get help and contact support'),
+              _buildSettingsItem(Icons.info, 'App Information',
+                  'Version and legal information'),
+              _buildSettingsItem(
+                  Icons.help, 'Help & Support', 'Get help and contact support'),
             ]),
           ],
         ),
@@ -284,7 +295,8 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const SmartAppBar(), // Automatic: standard variant, title "Profile 👤", edit + settings actions
+      appBar:
+          const SmartAppBar(), // Automatic: standard variant, title "Profile 👤", edit + settings actions
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: ListView(
@@ -302,7 +314,8 @@ class ProfileScreen extends StatelessWidget {
                     const SizedBox(height: 16),
                     const Text(
                       'John Doe',
-                      style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 8),
                     const Text(
@@ -323,10 +336,14 @@ class ProfileScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            _buildProfileListItem(Icons.favorite, 'Favorite Posts', 'View your liked posts'),
-            _buildProfileListItem(Icons.bookmark, 'Bookmarks', 'View saved content'),
-            _buildProfileListItem(Icons.history, 'History', 'View your activity history'),
-            _buildProfileListItem(Icons.share, 'Invite Friends', 'Share the app with friends'),
+            _buildProfileListItem(
+                Icons.favorite, 'Favorite Posts', 'View your liked posts'),
+            _buildProfileListItem(
+                Icons.bookmark, 'Bookmarks', 'View saved content'),
+            _buildProfileListItem(
+                Icons.history, 'History', 'View your activity history'),
+            _buildProfileListItem(
+                Icons.share, 'Invite Friends', 'Share the app with friends'),
           ],
         ),
       ),
@@ -369,7 +386,8 @@ class DashboardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const SmartAppBar(), // Automatic: glass variant, title "Dashboard 📊", notifications + search actions
+      appBar:
+          const SmartAppBar(), // Automatic: glass variant, title "Dashboard 📊", notifications + search actions
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
@@ -397,17 +415,21 @@ class DashboardScreen extends StatelessWidget {
               const SizedBox(height: 20),
               Row(
                 children: [
-                  _buildDashboardCard('Users', '1,234', Icons.people, Colors.blue),
+                  _buildDashboardCard(
+                      'Users', '1,234', Icons.people, Colors.blue),
                   const SizedBox(width: 16),
-                  _buildDashboardCard('Revenue', '\$12.5K', Icons.attach_money, Colors.green),
+                  _buildDashboardCard(
+                      'Revenue', '\$12.5K', Icons.attach_money, Colors.green),
                 ],
               ),
               const SizedBox(height: 16),
               Row(
                 children: [
-                  _buildDashboardCard('Orders', '89', Icons.shopping_cart, Colors.orange),
+                  _buildDashboardCard(
+                      'Orders', '89', Icons.shopping_cart, Colors.orange),
                   const SizedBox(width: 16),
-                  _buildDashboardCard('Growth', '+15%', Icons.trending_up, Colors.purple),
+                  _buildDashboardCard(
+                      'Growth', '+15%', Icons.trending_up, Colors.purple),
                 ],
               ),
               const SizedBox(height: 30),
@@ -423,7 +445,8 @@ class DashboardScreen extends StatelessWidget {
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                       const SizedBox(height: 12),
-                      _buildActivityItem('New user registered', '2 minutes ago'),
+                      _buildActivityItem(
+                          'New user registered', '2 minutes ago'),
                       _buildActivityItem('Order completed', '5 minutes ago'),
                       _buildActivityItem('Payment received', '10 minutes ago'),
                       _buildActivityItem('Settings updated', '1 hour ago'),
@@ -438,7 +461,8 @@ class DashboardScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildDashboardCard(String title, String value, IconData icon, Color color) {
+  Widget _buildDashboardCard(
+      String title, String value, IconData icon, Color color) {
     return Expanded(
       child: Card(
         child: Padding(
@@ -450,7 +474,8 @@ class DashboardScreen extends StatelessWidget {
               const SizedBox(height: 8),
               Text(
                 value,
-                style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
               Text(
                 title,

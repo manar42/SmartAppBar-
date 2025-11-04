@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 // import 'package:google_fonts/google_fonts.dart'; // Not used in tests
 
-import '../lib/smart_appbar.dart';
+import 'package:smart_appbar/smart_appbar.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   // GoogleFonts.config.disableInstanceLoading = true; // Removed - causes compilation issues
 
   group('SmartAppBar Tests', () {
-    
-    testWidgets('SmartAppBar should render with route-based title', (WidgetTester tester) async {
+    testWidgets('SmartAppBar should render with route-based title',
+        (WidgetTester tester) async {
       // Build a test app with routes
       await tester.pumpWidget(
         MaterialApp(
@@ -27,7 +27,8 @@ void main() {
       expect(find.byType(SmartAppBar), findsOneWidget);
     });
 
-    testWidgets('SmartAppBar should handle custom title override', (WidgetTester tester) async {
+    testWidgets('SmartAppBar should handle custom title override',
+        (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -44,7 +45,8 @@ void main() {
       expect(find.byType(SmartAppBar), findsOneWidget);
     });
 
-    testWidgets('SmartAppBar should handle loading state', (WidgetTester tester) async {
+    testWidgets('SmartAppBar should handle loading state',
+        (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -62,13 +64,17 @@ void main() {
       expect(find.text('Loading Test'), findsOneWidget);
     });
 
-    testWidgets('SmartAppBar should handle custom actions', (WidgetTester tester) async {
+    testWidgets('SmartAppBar should handle custom actions',
+        (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
             appBar: SmartAppBar(
               title: 'Actions Test',
-              actions: [SmartAppBarAction.notifications, SmartAppBarAction.search],
+              actions: [
+                SmartAppBarAction.notifications,
+                SmartAppBarAction.search
+              ],
             ),
             body: const Text('Test Body'),
           ),
@@ -80,9 +86,10 @@ void main() {
       expect(find.byIcon(Icons.search), findsOneWidget);
     });
 
-    testWidgets('SmartAppBar should support different variants', (WidgetTester tester) async {
+    testWidgets('SmartAppBar should support different variants',
+        (WidgetTester tester) async {
       final variants = SmartAppBarVariant.values;
-      
+
       for (final variant in variants) {
         await tester.pumpWidget(
           MaterialApp(
@@ -90,7 +97,8 @@ void main() {
               appBar: SmartAppBar(
                 title: 'Variant Test: $variant',
                 variant: variant,
-                enableAnimations: false, // Disable animations for faster testing
+                enableAnimations:
+                    false, // Disable animations for faster testing
               ),
               body: Text('Testing variant: $variant'),
             ),
@@ -102,7 +110,8 @@ void main() {
       }
     });
 
-    testWidgets('SmartAppBar should have proper accessibility labels', (WidgetTester tester) async {
+    testWidgets('SmartAppBar should have proper accessibility labels',
+        (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -116,11 +125,13 @@ void main() {
       );
 
       // Check that semantic labels are present
-      expect(find.bySemanticsLabel('App Bar: Accessibility Test'), findsOneWidget);
+      expect(
+          find.bySemanticsLabel('App Bar: Accessibility Test'), findsOneWidget);
       expect(find.bySemanticsLabel('Settings'), findsOneWidget);
     });
 
-    testWidgets('SmartAppBar should handle edge cases gracefully', (WidgetTester tester) async {
+    testWidgets('SmartAppBar should handle edge cases gracefully',
+        (WidgetTester tester) async {
       // Test with null route
       await tester.pumpWidget(
         MaterialApp(
@@ -173,15 +184,15 @@ class SettingsScreen extends StatelessWidget {
 
 class TestScreen extends StatelessWidget {
   final String routeName;
-  
+
   const TestScreen({super.key, required this.routeName});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: SmartAppBar(
-        // No title provided - will use route configuration
-      ),
+          // No title provided - will use route configuration
+          ),
       body: Text('Test Screen: $routeName'),
     );
   }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'smart_appbar.dart';
+import 'package:smart_appbar/smart_appbar.dart';
 
 void main() {
   runApp(const SmartAppBarShowcase());
@@ -14,8 +14,6 @@ class SmartAppBarShowcase extends StatefulWidget {
 
 class _SmartAppBarShowcaseState extends State<SmartAppBarShowcase> {
   ThemeMode _themeMode = ThemeMode.system;
-  bool _isLoading = false;
-  double _animationSpeed = 1.0;
 
   @override
   Widget build(BuildContext context) {
@@ -58,18 +56,6 @@ class _SmartAppBarShowcaseState extends State<SmartAppBarShowcase> {
       '/large': (context) => const LargeAppBarScreen(),
     };
   }
-
-  void _toggleTheme() {
-    setState(() {
-      _themeMode = _themeMode == ThemeMode.dark ? ThemeMode.light : ThemeMode.dark;
-    });
-  }
-
-  void _toggleLoading() {
-    setState(() {
-      _isLoading = !_isLoading;
-    });
-  }
 }
 
 class HomeScreen extends StatelessWidget {
@@ -94,8 +80,6 @@ class HomeScreen extends StatelessWidget {
               Theme.of(context).colorScheme.secondary.withOpacity(0.1),
               Theme.of(context).colorScheme.surface,
             ],
-           
-
           ),
         ),
         child: SingleChildScrollView(
@@ -135,8 +119,8 @@ class HomeScreen extends StatelessWidget {
                   child: Text(
                     'SmartAppBar Feature Showcase',
                     style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+                          fontWeight: FontWeight.bold,
+                        ),
                   ),
                 ),
               ],
@@ -224,15 +208,16 @@ class HomeScreen extends StatelessWidget {
             Text(
               'Quick Actions',
               style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+                    fontWeight: FontWeight.bold,
+                  ),
             ),
             const SizedBox(height: 12),
             Row(
               children: [
                 Expanded(
                   child: ElevatedButton.icon(
-                    onPressed: () => Navigator.of(context).pushNamed('/variants'),
+                    onPressed: () =>
+                        Navigator.of(context).pushNamed('/variants'),
                     icon: const Icon(Icons.explore),
                     label: const Text('Explore All Variants'),
                   ),
@@ -296,8 +281,8 @@ class _FeatureCard extends StatelessWidget {
               Text(
                 feature.title,
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
+                      fontWeight: FontWeight.bold,
+                    ),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 4),
@@ -400,8 +385,8 @@ class _VariantCard extends StatelessWidget {
                 Text(
                   demo.name,
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
+                        fontWeight: FontWeight.bold,
+                      ),
                 ),
                 const SizedBox(height: 8),
                 Text(
@@ -486,8 +471,6 @@ class _VariantPreview extends StatelessWidget {
         return null;
       case SmartAppBarVariant.large:
         return null;
-      default:
-        return null;
     }
   }
 }
@@ -526,7 +509,8 @@ class _ActionCard extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 12),
       child: ListTile(
         leading: CircleAvatar(
-          backgroundColor: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+          backgroundColor:
+              Theme.of(context).colorScheme.primary.withOpacity(0.1),
           child: Icon(
             action.icon,
             color: Theme.of(context).colorScheme.primary,
@@ -646,7 +630,8 @@ class _CustomScreenState extends State<CustomScreen> {
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                     const SizedBox(height: 16),
-                    _buildColorPicker('Background Color', _backgroundColor, (color) {
+                    _buildColorPicker('Background Color', _backgroundColor,
+                        (color) {
                       setState(() => _backgroundColor = color);
                     }),
                     const SizedBox(height: 16),
@@ -657,17 +642,20 @@ class _CustomScreenState extends State<CustomScreen> {
                     SwitchListTile(
                       title: const Text('Center Title'),
                       value: _centerTitle,
-                      onChanged: (value) => setState(() => _centerTitle = value),
+                      onChanged: (value) =>
+                          setState(() => _centerTitle = value),
                     ),
                     SwitchListTile(
                       title: const Text('Enable Gradient'),
                       value: _enableGradient,
-                      onChanged: (value) => setState(() => _enableGradient = value),
+                      onChanged: (value) =>
+                          setState(() => _enableGradient = value),
                     ),
                     SwitchListTile(
                       title: const Text('Show Back Button'),
                       value: _showBackButton,
-                      onChanged: (value) => setState(() => _showBackButton = value),
+                      onChanged: (value) =>
+                          setState(() => _showBackButton = value),
                     ),
                   ],
                 ),
@@ -700,7 +688,8 @@ class _CustomScreenState extends State<CustomScreen> {
     );
   }
 
-  Widget _buildColorPicker(String label, Color color, ValueChanged<Color> onChanged) {
+  Widget _buildColorPicker(
+      String label, Color color, ValueChanged<Color> onChanged) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -1013,8 +1002,10 @@ class _LoadingScreenState extends State<LoadingScreen> {
                       children: [
                         ElevatedButton.icon(
                           onPressed: _toggleLoading,
-                          icon: Icon(_isLoading ? Icons.stop : Icons.play_arrow),
-                          label: Text(_isLoading ? 'Stop Loading' : 'Start Loading'),
+                          icon:
+                              Icon(_isLoading ? Icons.stop : Icons.play_arrow),
+                          label: Text(
+                              _isLoading ? 'Stop Loading' : 'Start Loading'),
                         ),
                         const SizedBox(width: 16),
                         Expanded(
@@ -1023,7 +1014,8 @@ class _LoadingScreenState extends State<LoadingScreen> {
                               labelText: 'Custom Title',
                               border: OutlineInputBorder(),
                             ),
-                            onChanged: (value) => setState(() => _customTitle = value),
+                            onChanged: (value) =>
+                                setState(() => _customTitle = value),
                           ),
                         ),
                       ],
@@ -1322,7 +1314,8 @@ class GlassEffectScreen extends StatelessWidget {
                 children: [
                   Text('Glass Morphism Effect'),
                   SizedBox(height: 16),
-                  Text('This demonstrates the beautiful glass effect with blur and transparency.'),
+                  Text(
+                      'This demonstrates the beautiful glass effect with blur and transparency.'),
                 ],
               ),
             ),
@@ -1398,7 +1391,8 @@ class BorderedScreen extends StatelessWidget {
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                   const SizedBox(height: 8),
-                  const Text('This demonstrates the bordered variant with subtle border styling.'),
+                  const Text(
+                      'This demonstrates the bordered variant with subtle border styling.'),
                 ],
               ),
             ),
@@ -1437,7 +1431,8 @@ class ElevatedScreen extends StatelessWidget {
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                   const SizedBox(height: 8),
-                  const Text('This demonstrates the elevated variant with prominent shadow.'),
+                  const Text(
+                      'This demonstrates the elevated variant with prominent shadow.'),
                 ],
               ),
             ),
@@ -1476,7 +1471,8 @@ class LargeAppBarScreen extends StatelessWidget {
                     style: Theme.of(context).textTheme.headlineSmall,
                   ),
                   const SizedBox(height: 8),
-                  const Text('This demonstrates the large variant perfect for hero sections.'),
+                  const Text(
+                      'This demonstrates the large variant perfect for hero sections.'),
                 ],
               ),
             ),
