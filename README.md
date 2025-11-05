@@ -1,10 +1,13 @@
-[![Watch Demo](https://raw.githubusercontent.com/username/repo/main/assets/videos/demo_thumbnail.png)](https://raw.githubusercontent.com/username/repo/main/assets/videos/Video.mp4)
+
+![Demo GIF](https://raw.githubusercontent.com/manar42/SmartAppBar-/00f5715efa07f48626ba0fad200cb4ebf0554773/assets/videos/Video-.gif)
 
 
- 
 # SmartAppBar - Intelligent Flutter AppBar Widget
 
 A powerful, dynamic, and intelligent SmartAppBar widget for Flutter applications that automatically adapts to routes, supports multiple visual variants, and provides rich accessibility features.
+
+[![Pub Version](https://img.shields.io/pub/v/custom_snackbar_plus)](https://pub.dev/packages/custom_snackbar_plus)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 ## 🌟 Features
 
@@ -37,7 +40,7 @@ Add `smart_appbar` to your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  smart_appbar: ^1.0.0
+  smart_appbar: ^4.0.0
 ```
 
 Then run:

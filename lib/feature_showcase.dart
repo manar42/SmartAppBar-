@@ -13,7 +13,7 @@ class SmartAppBarShowcase extends StatefulWidget {
 }
 
 class _SmartAppBarShowcaseState extends State<SmartAppBarShowcase> {
-  ThemeMode _themeMode = ThemeMode.system;
+  final ThemeMode _themeMode = ThemeMode.system;
 
   @override
   Widget build(BuildContext context) {
@@ -76,8 +76,8 @@ class HomeScreen extends StatelessWidget {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              Theme.of(context).colorScheme.primary.withOpacity(0.1),
-              Theme.of(context).colorScheme.secondary.withOpacity(0.1),
+              Theme.of(context).colorScheme.primary.withValues(alpha: 0.1),
+              Theme.of(context).colorScheme.secondary.withValues(alpha: 0.1),
               Theme.of(context).colorScheme.surface,
             ],
           ),
@@ -443,8 +443,8 @@ class _VariantPreview extends StatelessWidget {
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            Colors.blue.withOpacity(0.1),
-            Colors.purple.withOpacity(0.1),
+            Colors.blue.withValues(alpha: 0.1),
+            Colors.purple.withValues(alpha: 0.1),
           ],
         ),
       ),
@@ -462,7 +462,7 @@ class _VariantPreview extends StatelessWidget {
       case SmartAppBarVariant.standard:
         return null;
       case SmartAppBarVariant.glass:
-        return Colors.white.withOpacity(0.9);
+        return Colors.white.withValues(alpha: 0.9);
       case SmartAppBarVariant.transparent:
         return null;
       case SmartAppBarVariant.bordered:
@@ -510,7 +510,7 @@ class _ActionCard extends StatelessWidget {
       child: ListTile(
         leading: CircleAvatar(
           backgroundColor:
-              Theme.of(context).colorScheme.primary.withOpacity(0.1),
+              Theme.of(context).colorScheme.primary.withValues(alpha: 0.1),
           child: Icon(
             action.icon,
             color: Theme.of(context).colorScheme.primary,
@@ -826,7 +826,7 @@ class _FadeAnimationDemoState extends State<_FadeAnimationDemo> {
           duration: const Duration(seconds: 1),
           child: Container(
             height: 100,
-            color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+            color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.1),
             child: const Center(child: Text('Fade Effect')),
           ),
         ),
@@ -880,7 +880,7 @@ class _SlideAnimationDemoState extends State<_SlideAnimationDemo>
           position: _animation,
           child: Container(
             height: 100,
-            color: Theme.of(context).colorScheme.secondary.withOpacity(0.1),
+            color: Theme.of(context).colorScheme.secondary.withValues(alpha: 0.1),
             child: const Center(child: Text('Slide Effect')),
           ),
         ),
@@ -941,7 +941,7 @@ class _ScaleAnimationDemoState extends State<_ScaleAnimationDemo>
               child: Container(
                 height: 100,
                 width: 200,
-                color: Theme.of(context).colorScheme.tertiary.withOpacity(0.1),
+                color: Theme.of(context).colorScheme.tertiary.withValues(alpha: 0.1),
                 child: const Center(child: Text('Scale Effect')),
               ),
             );
@@ -1160,7 +1160,7 @@ class _ElevationDemoState extends State<_ElevationDemo> {
             color: Theme.of(context).colorScheme.surface,
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.2),
+                color: Colors.black.withValues(alpha: 0.2),
                 blurRadius: _elevation,
                 offset: const Offset(0, 2),
               ),
@@ -1199,14 +1199,14 @@ class _BlurDemoState extends State<_BlurDemo> {
         Container(
           height: 80,
           decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.8 - (_blurIntensity * 0.5)),
+            color: Colors.white.withValues(alpha: 0.8 - (_blurIntensity * 0.5)),
             border: Border.all(
-              color: Colors.black.withOpacity(0.1),
+              color: Colors.black.withValues(alpha: 0.1),
               width: 0.5,
             ),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(_blurIntensity * 0.3),
+                color: Colors.black.withValues(alpha: _blurIntensity * 0.3),
                 blurRadius: _blurIntensity * 20,
                 offset: const Offset(0, 2),
               ),
@@ -1244,7 +1244,7 @@ class _PaddingDemoState extends State<_PaddingDemo> {
       children: [
         Container(
           height: 60,
-          color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+          color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.1),
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: _padding),
             child: Align(

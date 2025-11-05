@@ -1,9 +1,7 @@
 name: smart_appbar
-description: A powerful and intelligent SmartAppBar widget for Flutter that automatically adapts to routes, supports multiple visual variants, and provides seamless Material 3 design experience.
-version: 1.0.0
-homepage: https://github.com/yourusername/smart_appbar
-repository: https://github.com/yourusername/smart_appbar
-issue_tracker: https://github.com/yourusername/smart_appbar/issues
+description: Intelligent SmartAppBar widget for Flutter with 6 visual variants, automatic route adaptation, and Material 3 design.
+version: 4.0.0
+repository: https://github.com/manar42/SmartAppBar-
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
@@ -27,6 +25,3 @@ topics:
   - adaptive
   - material3
   - ui
-
-
-  

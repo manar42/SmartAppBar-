@@ -355,15 +355,15 @@ class _SmartAppBarState extends State<SmartAppBar>
       case SmartAppBarVariant.glass:
         // Glass morphism effect
         return BoxDecoration(
-          color: backgroundColor.withOpacity(0.8),
+          color: backgroundColor.withValues(alpha: 0.8),
           border: Border.all(
-            color: foregroundColor.withOpacity(0.1),
+            color: foregroundColor.withValues(alpha: 0.1),
             width: 0.5,
           ),
           borderRadius: BorderRadius.circular(0),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(isDark ? 0.3 : 0.1),
+              color: Colors.black.withValues(alpha: isDark ? 0.3 : 0.1),
               blurRadius: widget.blurIntensity * 20,
               offset: const Offset(0, 2),
             ),
@@ -377,7 +377,7 @@ class _SmartAppBarState extends State<SmartAppBar>
         return BoxDecoration(
           color: backgroundColor,
           border: Border.all(
-            color: foregroundColor.withOpacity(0.2),
+            color: foregroundColor.withValues(alpha: 0.2),
             width: 1.0,
           ),
         );
@@ -385,7 +385,7 @@ class _SmartAppBarState extends State<SmartAppBar>
       case SmartAppBarVariant.elevated:
         boxShadows = [
           BoxShadow(
-            color: Colors.black.withOpacity(isDark ? 0.3 : 0.1),
+            color: Colors.black.withValues(alpha: isDark ? 0.3 : 0.1),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),
@@ -404,8 +404,8 @@ class _SmartAppBarState extends State<SmartAppBar>
           end: Alignment.bottomRight,
           colors: [
             backgroundColor,
-            backgroundColor.withOpacity(0.95),
-            backgroundColor.withOpacity(0.9),
+            backgroundColor.withValues(alpha: 0.95),
+            backgroundColor.withValues(alpha: 0.9),
           ],
         ),
         boxShadow: boxShadows,
@@ -502,7 +502,7 @@ class _SmartAppBarState extends State<SmartAppBar>
             curve: Curves.easeInOut,
             decoration: BoxDecoration(
               color: _isPressed
-                  ? Colors.white.withOpacity(0.1)
+                  ? Colors.white.withValues(alpha: 0.1)
                   : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
             ),
@@ -613,7 +613,7 @@ class _SmartAppBarState extends State<SmartAppBar>
             curve: Curves.easeInOut,
             decoration: BoxDecoration(
               color: _isPressed
-                  ? Colors.white.withOpacity(0.1)
+                  ? Colors.white.withValues(alpha: 0.1)
                   : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
             ),

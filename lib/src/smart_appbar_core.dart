@@ -362,7 +362,7 @@ class _SmartAppBarState extends State<SmartAppBar>
           borderRadius: BorderRadius.circular(0),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(isDark ? 0.3 : 0.1),
+              color: Colors.black.withValues(alpha: isDark ? 0.3 : 0.1),
               blurRadius: widget.blurIntensity * 20,
               offset: const Offset(0, 2),
             ),
@@ -384,7 +384,7 @@ class _SmartAppBarState extends State<SmartAppBar>
       case SmartAppBarVariant.elevated:
         boxShadows = [
           BoxShadow(
-            color: Colors.black.withOpacity(isDark ? 0.3 : 0.1),
+            color: Colors.black.withValues(alpha: isDark ? 0.3 : 0.1),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),
