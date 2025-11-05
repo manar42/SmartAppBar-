@@ -6,7 +6,7 @@
 
 A powerful, dynamic, and intelligent SmartAppBar widget for Flutter applications that automatically adapts to routes, supports multiple visual variants, and provides rich accessibility features.
 
-[![Pub Version](https://img.shields.io/pub/v/custom_snackbar_plus)](https://pub.dev/packages/custom_snackbar_plus)
+[![Pub Version](https://img.shields.io/pub/v/smart_appbar)](https://pub.dev/packages/smart_appbar)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 ## 🌟 Features
@@ -40,7 +40,7 @@ Add `smart_appbar` to your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  smart_appbar: ^4.0.0
+  smart_appbar: ^1.0.3
 ```
 
 Then run:
@@ -372,8 +372,8 @@ test/
 If you find this package helpful, please ⭐ star the repository!
 
 For issues and questions:
-- [GitHub Issues](https://github.com/manar42/custom_snackbar_plus/issues)
-- [Pub.dev Package](https://pub.dev/packages/custom_snackbar_plus) 
+- [GitHub Issues](https://github.com/manar42/smart_appbar/issues)
+- [Pub.dev Package](https://pub.dev/packages/smart_appbar)
 
 
 **Made with ❤️ for the Flutter community**

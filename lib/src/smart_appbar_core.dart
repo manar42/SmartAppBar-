@@ -2,32 +2,32 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 // Route configuration constants
-const Map<String, _RouteConfig> _routeConfigs = {
-  '/home': _RouteConfig(
+const Map<String, RouteConfig> _routeConfigs = {
+  '/home': RouteConfig(
     title: 'Home 🏠',
     variant: SmartAppBarVariant.transparent,
     actions: [SmartAppBarAction.notifications, SmartAppBarAction.profile],
     automaticallyImplyLeading: false,
   ),
-  '/petProfile': _RouteConfig(
+  '/petProfile': RouteConfig(
     title: 'Pet Profile 🐾',
     variant: SmartAppBarVariant.glass,
     actions: [SmartAppBarAction.edit, SmartAppBarAction.share],
     centerTitle: true,
   ),
-  '/settings': _RouteConfig(
+  '/settings': RouteConfig(
     title: 'Settings ⚙️',
     variant: SmartAppBarVariant.bordered,
     actions: [SmartAppBarAction.search, SmartAppBarAction.more],
     centerTitle: true,
   ),
-  '/profile': _RouteConfig(
+  '/profile': RouteConfig(
     title: 'Profile 👤',
     variant: SmartAppBarVariant.standard,
     actions: [SmartAppBarAction.edit, SmartAppBarAction.settings],
     centerTitle: true,
   ),
-  '/dashboard': _RouteConfig(
+  '/dashboard': RouteConfig(
     title: 'Dashboard 📊',
     variant: SmartAppBarVariant.glass,
     actions: [SmartAppBarAction.notifications, SmartAppBarAction.search],
@@ -127,7 +127,7 @@ class SmartAppBar extends StatefulWidget implements PreferredSizeWidget {
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 
   /// Get current route configuration
-  static _RouteConfig? getRouteConfig(BuildContext context) {
+  static RouteConfig? getRouteConfig(BuildContext context) {
     final routeName = ModalRoute.of(context)?.settings.name;
     if (routeName == null) return null;
 
@@ -148,7 +148,7 @@ class SmartAppBar extends StatefulWidget implements PreferredSizeWidget {
   }
 
   /// Get default configuration for unknown routes
-  static _RouteConfig getDefaultConfig() => const _RouteConfig(
+  static RouteConfig getDefaultConfig() => const  RouteConfig(
         title: 'SmartApp',
         variant: SmartAppBarVariant.standard,
         actions: [SmartAppBarAction.more],
@@ -195,8 +195,8 @@ enum SmartAppBarAction {
 }
 
 /// Route configuration data class
-class _RouteConfig {
-  const _RouteConfig({
+class RouteConfig {
+  const RouteConfig({
     required this.title,
     required this.variant,
     required this.actions,
@@ -225,7 +225,7 @@ class _SmartAppBarState extends State<SmartAppBar>
   bool _isPressed = false;
 
   // Cache for performance
-  _RouteConfig? _cachedConfig;
+   RouteConfig? _cachedConfig;
   String? _cachedRouteName;
   // Note: Color cache fields removed as they're not used in current implementation
   // These can be used for performance optimization in future versions
@@ -298,7 +298,7 @@ class _SmartAppBarState extends State<SmartAppBar>
   }
 
   Widget _buildAnimatedAppBar(
-      BuildContext context, _RouteConfig config, bool isDark) {
+      BuildContext context, RouteConfig config, bool isDark) {
     return AnimatedBuilder(
       animation: _animationController,
       builder: (context, child) {
@@ -317,7 +317,7 @@ class _SmartAppBarState extends State<SmartAppBar>
   }
 
   Widget _buildStaticAppBar(
-      BuildContext context, _RouteConfig config, bool isDark) {
+      BuildContext context, RouteConfig config, bool isDark) {
     return Container(
       decoration: _buildDecoration(config, isDark),
       child: SafeArea(
@@ -340,7 +340,7 @@ class _SmartAppBarState extends State<SmartAppBar>
     );
   }
 
-  BoxDecoration _buildDecoration(_RouteConfig config, bool isDark) {
+  BoxDecoration _buildDecoration( RouteConfig config, bool isDark) {
     final backgroundColor = widget.backgroundColor ??
         config.backgroundColor ??
         _getDefaultBackgroundColor(config, isDark);
@@ -417,7 +417,7 @@ class _SmartAppBarState extends State<SmartAppBar>
     );
   }
 
-  Color _getDefaultBackgroundColor(_RouteConfig config, bool isDark) {
+  Color _getDefaultBackgroundColor(RouteConfig config, bool isDark) {
     switch (config.variant) {
       case SmartAppBarVariant.glass:
         // Use Material 3 surface colors for consistent appearance
@@ -438,7 +438,7 @@ class _SmartAppBarState extends State<SmartAppBar>
     }
   }
 
-  Color _getDefaultForegroundColor(_RouteConfig config, bool isDark) {
+  Color _getDefaultForegroundColor(RouteConfig config, bool isDark) {
     if (config.variant == SmartAppBarVariant.transparent) {
       return isDark ? Colors.white : Colors.black87;
     }
@@ -456,7 +456,7 @@ class _SmartAppBarState extends State<SmartAppBar>
   }
 
   Widget _buildTitleRow(
-      BuildContext context, _RouteConfig config, bool isDark) {
+      BuildContext context, RouteConfig config, bool isDark) {
     final effectiveCenterTitle = widget.centerTitle || config.centerTitle;
     final showLeading =
         _shouldShowBackButton() || widget.automaticallyImplyLeading;
@@ -698,11 +698,11 @@ class _SmartAppBarState extends State<SmartAppBar>
         (widget.variant == null || widget.variant != SmartAppBarVariant.large);
   }
 
-  _RouteConfig _getEffectiveConfig() {
+   RouteConfig _getEffectiveConfig() {
     final routeConfig =
         SmartAppBar.getRouteConfig(context) ?? SmartAppBar.getDefaultConfig();
 
-    return _RouteConfig(
+    return RouteConfig(
       title: widget.title ?? routeConfig.title,
       variant: widget.variant ?? routeConfig.variant,
       actions: widget.actions?.map((a) => a).toList() ?? routeConfig.actions,
