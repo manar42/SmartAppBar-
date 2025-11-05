@@ -880,7 +880,8 @@ class _SlideAnimationDemoState extends State<_SlideAnimationDemo>
           position: _animation,
           child: Container(
             height: 100,
-            color: Theme.of(context).colorScheme.secondary.withValues(alpha: 0.1),
+            color:
+                Theme.of(context).colorScheme.secondary.withValues(alpha: 0.1),
             child: const Center(child: Text('Slide Effect')),
           ),
         ),
@@ -941,7 +942,10 @@ class _ScaleAnimationDemoState extends State<_ScaleAnimationDemo>
               child: Container(
                 height: 100,
                 width: 200,
-                color: Theme.of(context).colorScheme.tertiary.withValues(alpha: 0.1),
+                color: Theme.of(context)
+                    .colorScheme
+                    .tertiary
+                    .withValues(alpha: 0.1),
                 child: const Center(child: Text('Scale Effect')),
               ),
             );
