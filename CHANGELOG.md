@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Switch Statements**: Replaced 3 instances of 'default' cases with explicit enum handling
 - **Private Types**: Fixed invalid use of private types in public API by making RouteConfig public
 - **Code Quality**: Eliminated all warnings, errors, and lint issues
-- **Package Standards**: Updated version to 5.0.0 for compliance with pub.dev requirements
+- **Package Standards**: Updated version to 1.0.4 for compliance with pub.dev requirements
 
 ### Technical
 - **Static Analysis**: 0 warnings, 0 errors, 0 deprecated API usage
@@ -20,7 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **API Design**: Proper public API exposure patterns
 
 ### Breaking Changes
-- **Version Update**: Package updated to 5.0.0 to match pub.dev requirements
+- **Version Update**: Package updated to 1.0.4 to match pub.dev requirements
 - **API Compatibility**: All existing APIs remain compatible
 
 ---
