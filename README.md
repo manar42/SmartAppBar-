@@ -6,8 +6,6 @@
 
 A powerful, dynamic, and intelligent SmartAppBar widget for Flutter applications that automatically adapts to routes, supports multiple visual variants, and provides rich accessibility features.
 
-[![Pub Version](https://img.shields.io/pub/v/smart_appbar)](https://pub.dev/packages/smart_appbar)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 ## 🌟 Features
 

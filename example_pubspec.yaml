@@ -1,6 +1,6 @@
 name: smart_appbar_example
 description: Example usage of the smart_appbar package
-version: 1.0.3
+version: 1.0.4
 publish_to: 'none' # Don't publish example
 
 environment:
