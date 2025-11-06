@@ -45,6 +45,30 @@ const Map<String, RouteConfig> _routeConfigs = {
 /// - Smooth animations and transitions
 /// - Full accessibility support
 class SmartAppBar extends StatefulWidget implements PreferredSizeWidget {
+  /// Create a SmartAppBar with automatic route-based configuration
+  ///
+  /// Only specify parameters you want to override. Everything else is automatic.
+  const SmartAppBar({
+    super.key,
+    this.title,
+    this.actions,
+    this.variant,
+    this.centerTitle = false,
+    this.backgroundColor,
+    this.foregroundColor,
+    this.elevation = 0.0,
+    this.showBackButton = true,
+    this.onBackPressed,
+    this.enableAnimations = true,
+    this.animationDuration = const Duration(milliseconds: 300),
+    this.titlePadding,
+    this.automaticallyImplyLeading = true,
+    this.blurIntensity = 0.1,
+    this.enableGradient = false,
+    this.isLoading = false,
+    this.loadingIcon,
+  });
+
   /// Optional custom title (if not provided, will be determined by route)
   final String? title;
 
@@ -96,30 +120,6 @@ class SmartAppBar extends StatefulWidget implements PreferredSizeWidget {
   /// Custom loading icon
   final IconData? loadingIcon;
 
-  /// Create a SmartAppBar with automatic route-based configuration
-  ///
-  /// Only specify parameters you want to override. Everything else is automatic.
-  const SmartAppBar({
-    super.key,
-    this.title,
-    this.actions,
-    this.variant,
-    this.centerTitle = false,
-    this.backgroundColor,
-    this.foregroundColor,
-    this.elevation = 0.0,
-    this.showBackButton = true,
-    this.onBackPressed,
-    this.enableAnimations = true,
-    this.animationDuration = const Duration(milliseconds: 300),
-    this.titlePadding,
-    this.automaticallyImplyLeading = true,
-    this.blurIntensity = 0.1,
-    this.enableGradient = false,
-    this.isLoading = false,
-    this.loadingIcon,
-  });
-
   @override
   State<SmartAppBar> createState() => _SmartAppBarState();
 
@@ -148,11 +148,10 @@ class SmartAppBar extends StatefulWidget implements PreferredSizeWidget {
   }
 
   /// Get default configuration for unknown routes
-  static RouteConfig getDefaultConfig() => const  RouteConfig(
+  static RouteConfig getDefaultConfig() => const RouteConfig(
         title: 'SmartApp',
         variant: SmartAppBarVariant.standard,
         actions: [SmartAppBarAction.more],
-        centerTitle: false,
       );
 }
 
@@ -225,7 +224,7 @@ class _SmartAppBarState extends State<SmartAppBar>
   bool _isPressed = false;
 
   // Cache for performance
-   RouteConfig? _cachedConfig;
+  RouteConfig? _cachedConfig;
   String? _cachedRouteName;
   // Note: Color cache fields removed as they're not used in current implementation
   // These can be used for performance optimization in future versions
@@ -253,16 +252,16 @@ class _SmartAppBarState extends State<SmartAppBar>
     );
 
     _fadeAnimation = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
+      begin: 0,
+      end: 1,
     ).animate(CurvedAnimation(
       parent: _animationController,
       curve: Curves.easeOut,
     ));
 
     _slideAnimation = Tween<double>(
-      begin: -30.0,
-      end: 0.0,
+      begin: -30,
+      end: 0,
     ).animate(CurvedAnimation(
       parent: _animationController,
       curve: Curves.easeOutCubic,
@@ -270,7 +269,7 @@ class _SmartAppBarState extends State<SmartAppBar>
 
     _scaleAnimation = Tween<double>(
       begin: 0.95,
-      end: 1.0,
+      end: 1,
     ).animate(CurvedAnimation(
       parent: _animationController,
       curve: Curves.elasticOut,
@@ -318,7 +317,7 @@ class _SmartAppBarState extends State<SmartAppBar>
 
   Widget _buildStaticAppBar(
       BuildContext context, RouteConfig config, bool isDark) {
-    return Container(
+    return DecoratedBox(
       decoration: _buildDecoration(config, isDark),
       child: SafeArea(
         child: Container(
@@ -340,7 +339,7 @@ class _SmartAppBarState extends State<SmartAppBar>
     );
   }
 
-  BoxDecoration _buildDecoration( RouteConfig config, bool isDark) {
+  BoxDecoration _buildDecoration(RouteConfig config, bool isDark) {
     final backgroundColor = widget.backgroundColor ??
         config.backgroundColor ??
         _getDefaultBackgroundColor(config, isDark);
@@ -377,7 +376,6 @@ class _SmartAppBarState extends State<SmartAppBar>
           color: backgroundColor,
           border: Border.all(
             color: foregroundColor.withValues(alpha: 0.2),
-            width: 1.0,
           ),
         );
 
@@ -433,7 +431,8 @@ class _SmartAppBarState extends State<SmartAppBar>
             .colorScheme
             .primaryContainer
             .withValues(alpha: 0.3);
-      default:
+      case SmartAppBarVariant.standard:
+      case SmartAppBarVariant.bordered:
         return Theme.of(context).colorScheme.surface;
     }
   }
@@ -450,13 +449,16 @@ class _SmartAppBarState extends State<SmartAppBar>
     switch (variant) {
       case SmartAppBarVariant.large:
         return 88;
-      default:
+      case SmartAppBarVariant.glass:
+      case SmartAppBarVariant.standard:
+      case SmartAppBarVariant.bordered:
+      case SmartAppBarVariant.elevated:
+      case SmartAppBarVariant.transparent:
         return kToolbarHeight;
     }
   }
 
-  Widget _buildTitleRow(
-      BuildContext context, RouteConfig config, bool isDark) {
+  Widget _buildTitleRow(BuildContext context, RouteConfig config, bool isDark) {
     final effectiveCenterTitle = widget.centerTitle || config.centerTitle;
     final showLeading =
         _shouldShowBackButton() || widget.automaticallyImplyLeading;
@@ -698,7 +700,7 @@ class _SmartAppBarState extends State<SmartAppBar>
         (widget.variant == null || widget.variant != SmartAppBarVariant.large);
   }
 
-   RouteConfig _getEffectiveConfig() {
+  RouteConfig _getEffectiveConfig() {
     final routeConfig =
         SmartAppBar.getRouteConfig(context) ?? SmartAppBar.getDefaultConfig();
 

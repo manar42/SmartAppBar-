@@ -40,7 +40,7 @@ Add `smart_appbar` to your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  smart_appbar: ^1.0.3
+  smart_appbar: ^1.0.4
 ```
 
 Then run:

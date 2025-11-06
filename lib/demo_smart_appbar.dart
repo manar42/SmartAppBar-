@@ -16,7 +16,6 @@ class SmartAppBarDemo extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
           seedColor: Colors.blue,
-          brightness: Brightness.light,
         ),
         useMaterial3: true,
       ),
@@ -27,7 +26,6 @@ class SmartAppBarDemo extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      themeMode: ThemeMode.system,
       home: const HomeScreen(),
       routes: {
         '/home': (context) => const HomeScreen(),
@@ -48,7 +46,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar:
           const SmartAppBar(), // Automatic: transparent variant, title "Home 🏠", notifications + profile actions
-      body: Container(
+      body: DecoratedBox(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
@@ -135,7 +133,7 @@ class PetProfileScreen extends StatelessWidget {
     return Scaffold(
       appBar:
           const SmartAppBar(), // Automatic: glass variant, title "Pet Profile 🐾", edit + share actions
-      body: Container(
+      body: DecoratedBox(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
@@ -148,7 +146,7 @@ class PetProfileScreen extends StatelessWidget {
           ),
         ),
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -221,7 +219,7 @@ class SettingsScreen extends StatelessWidget {
       appBar:
           const SmartAppBar(), // Automatic: bordered variant, title "Settings ⚙️", search + more actions
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16),
         child: ListView(
           children: [
             const Text(
@@ -286,12 +284,12 @@ class ProfileScreen extends StatelessWidget {
       appBar:
           const SmartAppBar(), // Automatic: standard variant, title "Profile 👤", edit + settings actions
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16),
         child: ListView(
           children: [
             Card(
               child: Padding(
-                padding: const EdgeInsets.all(20.0),
+                padding: const EdgeInsets.all(20),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -376,7 +374,7 @@ class DashboardScreen extends StatelessWidget {
     return Scaffold(
       appBar:
           const SmartAppBar(), // Automatic: glass variant, title "Dashboard 📊", notifications + search actions
-      body: Container(
+      body: DecoratedBox(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
@@ -389,7 +387,7 @@ class DashboardScreen extends StatelessWidget {
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16),
           child: ListView(
             children: [
               const Text(
@@ -407,7 +405,7 @@ class DashboardScreen extends StatelessWidget {
                       'Users', '1,234', Icons.people, Colors.blue),
                   const SizedBox(width: 16),
                   _buildDashboardCard(
-                      'Revenue', '\$12.5K', Icons.attach_money, Colors.green),
+                      'Revenue', r'$12.5K', Icons.attach_money, Colors.green),
                 ],
               ),
               const SizedBox(height: 16),
@@ -421,9 +419,9 @@ class DashboardScreen extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 30),
-              Card(
+              const Card(
                 child: Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: EdgeInsets.all(16),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
@@ -442,7 +440,7 @@ class DashboardScreen extends StatelessWidget {
     return Expanded(
       child: Card(
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

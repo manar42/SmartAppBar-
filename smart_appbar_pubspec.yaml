@@ -1,6 +1,6 @@
 name: smart_appbar
 description: A powerful and intelligent SmartAppBar widget for Flutter that automatically adapts to routes, supports multiple visual variants, and provides seamless Material 3 design experience.
-version: 1.0.2
+version: 1.0.4
 repository: https://github.com/manar42/SmartAppBar-
 
 

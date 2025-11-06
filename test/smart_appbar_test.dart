@@ -30,13 +30,13 @@ void main() {
     testWidgets('SmartAppBar should handle custom title override',
         (WidgetTester tester) async {
       await tester.pumpWidget(
-        MaterialApp(
+        const MaterialApp(
           home: Scaffold(
             appBar: SmartAppBar(
               title: 'Custom Title',
               variant: SmartAppBarVariant.standard,
             ),
-            body: const Text('Test Body'),
+            body: Text('Test Body'),
           ),
         ),
       );
@@ -48,13 +48,13 @@ void main() {
     testWidgets('SmartAppBar should handle loading state',
         (WidgetTester tester) async {
       await tester.pumpWidget(
-        MaterialApp(
+        const MaterialApp(
           home: Scaffold(
             appBar: SmartAppBar(
               title: 'Loading Test',
               isLoading: true,
             ),
-            body: const Text('Test Body'),
+            body: Text('Test Body'),
           ),
         ),
       );
@@ -67,7 +67,7 @@ void main() {
     testWidgets('SmartAppBar should handle custom actions',
         (WidgetTester tester) async {
       await tester.pumpWidget(
-        MaterialApp(
+        const MaterialApp(
           home: Scaffold(
             appBar: SmartAppBar(
               title: 'Actions Test',
@@ -76,7 +76,7 @@ void main() {
                 SmartAppBarAction.search
               ],
             ),
-            body: const Text('Test Body'),
+            body: Text('Test Body'),
           ),
         ),
       );
@@ -88,7 +88,7 @@ void main() {
 
     testWidgets('SmartAppBar should support different variants',
         (WidgetTester tester) async {
-      final variants = SmartAppBarVariant.values;
+      const variants = SmartAppBarVariant.values;
 
       for (final variant in variants) {
         await tester.pumpWidget(
@@ -113,13 +113,13 @@ void main() {
     testWidgets('SmartAppBar should have proper accessibility labels',
         (WidgetTester tester) async {
       await tester.pumpWidget(
-        MaterialApp(
+        const MaterialApp(
           home: Scaffold(
             appBar: SmartAppBar(
               title: 'Accessibility Test',
               actions: [SmartAppBarAction.settings],
             ),
-            body: const Text('Test Body'),
+            body: Text('Test Body'),
           ),
         ),
       );
@@ -134,8 +134,8 @@ void main() {
         (WidgetTester tester) async {
       // Test with null route
       await tester.pumpWidget(
-        MaterialApp(
-          home: const NullRouteTestScreen(),
+        const MaterialApp(
+          home: NullRouteTestScreen(),
         ),
       );
 
@@ -151,9 +151,9 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const SmartAppBar(), // Will auto-detect transparent variant
-      body: const Text('Home Screen'),
+    return const Scaffold(
+      appBar: SmartAppBar(), // Will auto-detect transparent variant
+      body: Text('Home Screen'),
     );
   }
 }
@@ -163,9 +163,9 @@ class PetProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const SmartAppBar(), // Will auto-detect glass variant
-      body: const Text('Pet Profile Screen'),
+    return const Scaffold(
+      appBar: SmartAppBar(), // Will auto-detect glass variant
+      body: Text('Pet Profile Screen'),
     );
   }
 }
@@ -175,22 +175,21 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const SmartAppBar(), // Will auto-detect bordered variant
-      body: const Text('Settings Screen'),
+    return const Scaffold(
+      appBar: SmartAppBar(), // Will auto-detect bordered variant
+      body: Text('Settings Screen'),
     );
   }
 }
 
 class TestScreen extends StatelessWidget {
-  final String routeName;
-
   const TestScreen({super.key, required this.routeName});
+  final String routeName;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: SmartAppBar(
+      appBar: const SmartAppBar(
           // No title provided - will use route configuration
           ),
       body: Text('Test Screen: $routeName'),
@@ -220,9 +219,9 @@ class SecondScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const SmartAppBar(title: 'Second Screen'),
-      body: const Center(
+    return const Scaffold(
+      appBar: SmartAppBar(title: 'Second Screen'),
+      body: Center(
         child: Text('Second Screen'),
       ),
     );
@@ -234,9 +233,9 @@ class ThemeTestScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const SmartAppBar(title: 'Theme Test'),
-      body: const Text('Theme Test Screen'),
+    return const Scaffold(
+      appBar: SmartAppBar(title: 'Theme Test'),
+      body: Text('Theme Test Screen'),
     );
   }
 }
@@ -246,9 +245,9 @@ class NullRouteTestScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const SmartAppBar(), // No route, should use default
-      body: const Text('Null Route Test'),
+    return const Scaffold(
+      appBar: SmartAppBar(), // No route, should use default
+      body: Text('Null Route Test'),
     );
   }
 }

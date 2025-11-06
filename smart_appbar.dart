@@ -2,32 +2,32 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 // Route configuration constants
-const Map<String, _RouteConfig> _routeConfigs = {
-  '/home': _RouteConfig(
+const Map<String, RouteConfig> _routeConfigs = {
+  '/home': RouteConfig(
     title: 'Home 🏠',
     variant: SmartAppBarVariant.transparent,
     actions: [SmartAppBarAction.notifications, SmartAppBarAction.profile],
     automaticallyImplyLeading: false,
   ),
-  '/petProfile': _RouteConfig(
+  '/petProfile': RouteConfig(
     title: 'Pet Profile 🐾',
     variant: SmartAppBarVariant.glass,
     actions: [SmartAppBarAction.edit, SmartAppBarAction.share],
     centerTitle: true,
   ),
-  '/settings': _RouteConfig(
+  '/settings': RouteConfig(
     title: 'Settings ⚙️',
     variant: SmartAppBarVariant.bordered,
     actions: [SmartAppBarAction.search, SmartAppBarAction.more],
     centerTitle: true,
   ),
-  '/profile': _RouteConfig(
+  '/profile': RouteConfig(
     title: 'Profile 👤',
     variant: SmartAppBarVariant.standard,
     actions: [SmartAppBarAction.edit, SmartAppBarAction.settings],
     centerTitle: true,
   ),
-  '/dashboard': _RouteConfig(
+  '/dashboard': RouteConfig(
     title: 'Dashboard 📊',
     variant: SmartAppBarVariant.glass,
     actions: [SmartAppBarAction.notifications, SmartAppBarAction.search],
@@ -45,6 +45,30 @@ const Map<String, _RouteConfig> _routeConfigs = {
 /// - Smooth animations and transitions
 /// - Full accessibility support
 class SmartAppBar extends StatefulWidget implements PreferredSizeWidget {
+  /// Create a SmartAppBar with automatic route-based configuration
+  ///
+  /// Only specify parameters you want to override. Everything else is automatic.
+  const SmartAppBar({
+    super.key,
+    this.title,
+    this.actions,
+    this.variant,
+    this.centerTitle = false,
+    this.backgroundColor,
+    this.foregroundColor,
+    this.elevation = 0.0,
+    this.showBackButton = true,
+    this.onBackPressed,
+    this.enableAnimations = true,
+    this.animationDuration = const Duration(milliseconds: 300),
+    this.titlePadding,
+    this.automaticallyImplyLeading = true,
+    this.blurIntensity = 0.1,
+    this.enableGradient = false,
+    this.isLoading = false,
+    this.loadingIcon,
+  });
+
   /// Optional custom title (if not provided, will be determined by route)
   final String? title;
 
@@ -96,30 +120,6 @@ class SmartAppBar extends StatefulWidget implements PreferredSizeWidget {
   /// Custom loading icon
   final IconData? loadingIcon;
 
-  /// Create a SmartAppBar with automatic route-based configuration
-  ///
-  /// Only specify parameters you want to override. Everything else is automatic.
-  const SmartAppBar({
-    super.key,
-    this.title,
-    this.actions,
-    this.variant,
-    this.centerTitle = false,
-    this.backgroundColor,
-    this.foregroundColor,
-    this.elevation = 0.0,
-    this.showBackButton = true,
-    this.onBackPressed,
-    this.enableAnimations = true,
-    this.animationDuration = const Duration(milliseconds: 300),
-    this.titlePadding,
-    this.automaticallyImplyLeading = true,
-    this.blurIntensity = 0.1,
-    this.enableGradient = false,
-    this.isLoading = false,
-    this.loadingIcon,
-  });
-
   @override
   State<SmartAppBar> createState() => _SmartAppBarState();
 
@@ -127,7 +127,7 @@ class SmartAppBar extends StatefulWidget implements PreferredSizeWidget {
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 
   /// Get current route configuration
-  static _RouteConfig? getRouteConfig(BuildContext context) {
+  static RouteConfig? getRouteConfig(BuildContext context) {
     final routeName = ModalRoute.of(context)?.settings.name;
     if (routeName == null) return null;
 
@@ -148,11 +148,10 @@ class SmartAppBar extends StatefulWidget implements PreferredSizeWidget {
   }
 
   /// Get default configuration for unknown routes
-  static _RouteConfig getDefaultConfig() => const _RouteConfig(
+  static RouteConfig getDefaultConfig() => const RouteConfig(
         title: 'SmartApp',
         variant: SmartAppBarVariant.standard,
         actions: [SmartAppBarAction.more],
-        centerTitle: false,
       );
 }
 
@@ -195,8 +194,8 @@ enum SmartAppBarAction {
 }
 
 /// Route configuration data class
-class _RouteConfig {
-  const _RouteConfig({
+class RouteConfig {
+  const RouteConfig({
     required this.title,
     required this.variant,
     required this.actions,
@@ -225,7 +224,7 @@ class _SmartAppBarState extends State<SmartAppBar>
   bool _isPressed = false;
 
   // Cache for performance
-  _RouteConfig? _cachedConfig;
+  RouteConfig? _cachedConfig;
   String? _cachedRouteName;
   // Color caching commented out as it's not currently used
   // Color? _cachedBackgroundColor;
@@ -254,16 +253,16 @@ class _SmartAppBarState extends State<SmartAppBar>
     );
 
     _fadeAnimation = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
+      begin: 0,
+      end: 1,
     ).animate(CurvedAnimation(
       parent: _animationController,
       curve: Curves.easeOut,
     ));
 
     _slideAnimation = Tween<double>(
-      begin: -30.0,
-      end: 0.0,
+      begin: -30,
+      end: 0,
     ).animate(CurvedAnimation(
       parent: _animationController,
       curve: Curves.easeOutCubic,
@@ -271,7 +270,7 @@ class _SmartAppBarState extends State<SmartAppBar>
 
     _scaleAnimation = Tween<double>(
       begin: 0.95,
-      end: 1.0,
+      end: 1,
     ).animate(CurvedAnimation(
       parent: _animationController,
       curve: Curves.elasticOut,
@@ -299,7 +298,7 @@ class _SmartAppBarState extends State<SmartAppBar>
   }
 
   Widget _buildAnimatedAppBar(
-      BuildContext context, _RouteConfig config, bool isDark) {
+      BuildContext context, RouteConfig config, bool isDark) {
     return AnimatedBuilder(
       animation: _animationController,
       builder: (context, child) {
@@ -318,8 +317,8 @@ class _SmartAppBarState extends State<SmartAppBar>
   }
 
   Widget _buildStaticAppBar(
-      BuildContext context, _RouteConfig config, bool isDark) {
-    return Container(
+      BuildContext context, RouteConfig config, bool isDark) {
+    return DecoratedBox(
       decoration: _buildDecoration(config, isDark),
       child: SafeArea(
         child: Container(
@@ -341,7 +340,7 @@ class _SmartAppBarState extends State<SmartAppBar>
     );
   }
 
-  BoxDecoration _buildDecoration(_RouteConfig config, bool isDark) {
+  BoxDecoration _buildDecoration(RouteConfig config, bool isDark) {
     final backgroundColor = widget.backgroundColor ??
         config.backgroundColor ??
         _getDefaultBackgroundColor(config, isDark);
@@ -378,7 +377,6 @@ class _SmartAppBarState extends State<SmartAppBar>
           color: backgroundColor,
           border: Border.all(
             color: foregroundColor.withValues(alpha: 0.2),
-            width: 1.0,
           ),
         );
 
@@ -418,7 +416,7 @@ class _SmartAppBarState extends State<SmartAppBar>
     );
   }
 
-  Color _getDefaultBackgroundColor(_RouteConfig config, bool isDark) {
+  Color _getDefaultBackgroundColor(RouteConfig config, bool isDark) {
     switch (config.variant) {
       case SmartAppBarVariant.glass:
         // Use Material 3 surface colors for consistent appearance
@@ -440,7 +438,7 @@ class _SmartAppBarState extends State<SmartAppBar>
     }
   }
 
-  Color _getDefaultForegroundColor(_RouteConfig config, bool isDark) {
+  Color _getDefaultForegroundColor(RouteConfig config, bool isDark) {
     if (config.variant == SmartAppBarVariant.transparent) {
       return isDark ? Colors.white : Colors.black87;
     }
@@ -451,7 +449,7 @@ class _SmartAppBarState extends State<SmartAppBar>
   double _getAppBarHeight(SmartAppBarVariant variant) {
     switch (variant) {
       case SmartAppBarVariant.large:
-        return 88.0;
+        return 88;
       case SmartAppBarVariant.glass:
       case SmartAppBarVariant.standard:
       case SmartAppBarVariant.bordered:
@@ -462,7 +460,7 @@ class _SmartAppBarState extends State<SmartAppBar>
   }
 
   Widget _buildTitleRow(
-      BuildContext context, _RouteConfig config, bool isDark) {
+      BuildContext context, RouteConfig config, bool isDark) {
     final effectiveCenterTitle = widget.centerTitle || config.centerTitle;
     final showLeading =
         _shouldShowBackButton() || widget.automaticallyImplyLeading;
@@ -704,11 +702,11 @@ class _SmartAppBarState extends State<SmartAppBar>
         (widget.variant == null || widget.variant != SmartAppBarVariant.large);
   }
 
-  _RouteConfig _getEffectiveConfig() {
+  RouteConfig _getEffectiveConfig() {
     final routeConfig =
         SmartAppBar.getRouteConfig(context) ?? SmartAppBar.getDefaultConfig();
 
-    return _RouteConfig(
+    return RouteConfig(
       title: widget.title ?? routeConfig.title,
       variant: widget.variant ?? routeConfig.variant,
       actions: widget.actions?.map((a) => a).toList() ?? routeConfig.actions,

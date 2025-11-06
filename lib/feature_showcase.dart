@@ -24,7 +24,6 @@ class _SmartAppBarShowcaseState extends State<SmartAppBarShowcase> {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
           seedColor: Colors.blue,
-          brightness: Brightness.light,
         ),
         useMaterial3: true,
       ),
@@ -70,7 +69,7 @@ class HomeScreen extends StatelessWidget {
         actions: [SmartAppBarAction.settings, SmartAppBarAction.favorite],
         enableGradient: true,
       ),
-      body: Container(
+      body: DecoratedBox(
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
@@ -138,42 +137,42 @@ class HomeScreen extends StatelessWidget {
 
   Widget _buildFeaturesGrid(BuildContext context) {
     final features = [
-      _FeatureItem(
+      const _FeatureItem(
         icon: Icons.palette,
         title: 'Visual Variants',
         subtitle: '6 different styles',
         color: Colors.purple,
         route: '/variants',
       ),
-      _FeatureItem(
+      const _FeatureItem(
         icon: Icons.touch_app,
         title: 'Smart Actions',
         subtitle: '10+ action types',
         color: Colors.blue,
         route: '/actions',
       ),
-      _FeatureItem(
+      const _FeatureItem(
         icon: Icons.color_lens,
         title: 'Custom Styling',
         subtitle: 'Colors & themes',
         color: Colors.green,
         route: '/custom',
       ),
-      _FeatureItem(
+      const _FeatureItem(
         icon: Icons.animation,
         title: 'Animations',
         subtitle: 'Smooth transitions',
         color: Colors.orange,
         route: '/animation',
       ),
-      _FeatureItem(
+      const _FeatureItem(
         icon: Icons.hourglass_empty,
         title: 'Loading States',
         subtitle: 'Progress indicators',
         color: Colors.red,
         route: '/loading',
       ),
-      _FeatureItem(
+      const _FeatureItem(
         icon: Icons.tune,
         title: 'Advanced Options',
         subtitle: 'Fine-tuned controls',
@@ -240,12 +239,6 @@ class HomeScreen extends StatelessWidget {
 }
 
 class _FeatureItem {
-  final IconData icon;
-  final String title;
-  final String subtitle;
-  final Color color;
-  final String route;
-
   const _FeatureItem({
     required this.icon,
     required this.title,
@@ -253,12 +246,16 @@ class _FeatureItem {
     required this.color,
     required this.route,
   });
+  final IconData icon;
+  final String title;
+  final String subtitle;
+  final Color color;
+  final String route;
 }
 
 class _FeatureCard extends StatelessWidget {
-  final _FeatureItem feature;
-
   const _FeatureCard({required this.feature});
+  final _FeatureItem feature;
 
   @override
   Widget build(BuildContext context) {
@@ -305,32 +302,32 @@ class VariantsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final variants = [
-      _VariantDemo(
+      const _VariantDemo(
         name: 'Standard',
         variant: SmartAppBarVariant.standard,
         description: 'Classic Material 3 design with clean appearance',
       ),
-      _VariantDemo(
+      const _VariantDemo(
         name: 'Glass Effect',
         variant: SmartAppBarVariant.glass,
         description: 'Beautiful glass morphism with blur and transparency',
       ),
-      _VariantDemo(
+      const _VariantDemo(
         name: 'Transparent',
         variant: SmartAppBarVariant.transparent,
         description: 'Fully transparent for overlay scenarios',
       ),
-      _VariantDemo(
+      const _VariantDemo(
         name: 'Bordered',
         variant: SmartAppBarVariant.bordered,
         description: 'Subtle border appearance for modern look',
       ),
-      _VariantDemo(
+      const _VariantDemo(
         name: 'Elevated',
         variant: SmartAppBarVariant.elevated,
         description: 'Prominent shadow and depth effect',
       ),
-      _VariantDemo(
+      const _VariantDemo(
         name: 'Large',
         variant: SmartAppBarVariant.large,
         description: 'Big title app bar for hero sections',
@@ -354,21 +351,19 @@ class VariantsScreen extends StatelessWidget {
 }
 
 class _VariantDemo {
-  final String name;
-  final SmartAppBarVariant variant;
-  final String description;
-
   const _VariantDemo({
     required this.name,
     required this.variant,
     required this.description,
   });
+  final String name;
+  final SmartAppBarVariant variant;
+  final String description;
 }
 
 class _VariantCard extends StatelessWidget {
-  final _VariantDemo demo;
-
   const _VariantCard({required this.demo});
+  final _VariantDemo demo;
 
   @override
   Widget build(BuildContext context) {
@@ -423,16 +418,16 @@ class _VariantCard extends StatelessWidget {
       case SmartAppBarVariant.large:
         Navigator.of(context).pushNamed('/large');
         break;
-      default:
+      case SmartAppBarVariant.standard:
         Navigator.of(context).pushNamed('/custom');
+        break;
     }
   }
 }
 
 class _VariantPreview extends StatelessWidget {
-  final SmartAppBarVariant variant;
-
   const _VariantPreview({required this.variant});
+  final SmartAppBarVariant variant;
 
   @override
   Widget build(BuildContext context) {
@@ -451,7 +446,7 @@ class _VariantPreview extends StatelessWidget {
       child: SmartAppBar(
         title: '${variant.name} Preview',
         variant: variant,
-        actions: [SmartAppBarAction.search, SmartAppBarAction.favorite],
+        actions: const [SmartAppBarAction.search, SmartAppBarAction.favorite],
         backgroundColor: _getPreviewColor(variant),
       ),
     );
@@ -480,7 +475,7 @@ class ActionsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final actions = SmartAppBarAction.values;
+    const actions = SmartAppBarAction.values;
 
     return Scaffold(
       appBar: const SmartAppBar(
@@ -499,9 +494,8 @@ class ActionsScreen extends StatelessWidget {
 }
 
 class _ActionCard extends StatelessWidget {
-  final SmartAppBarAction action;
-
   const _ActionCard({required this.action});
+  final SmartAppBarAction action;
 
   @override
   Widget build(BuildContext context) {
@@ -613,7 +607,7 @@ class _CustomScreenState extends State<CustomScreen> {
         centerTitle: _centerTitle,
         enableGradient: _enableGradient,
         showBackButton: _showBackButton,
-        actions: [SmartAppBarAction.edit, SmartAppBarAction.share],
+        actions: const [SmartAppBarAction.edit, SmartAppBarAction.share],
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
@@ -714,10 +708,9 @@ class _CustomScreenState extends State<CustomScreen> {
 }
 
 class _ColorOption extends StatelessWidget {
+  const _ColorOption(this.color, this.onChanged);
   final Color color;
   final ValueChanged<Color> onChanged;
-
-  const _ColorOption(this.color, this.onChanged);
 
   @override
   Widget build(BuildContext context) {
@@ -749,7 +742,6 @@ class AnimationScreen extends StatelessWidget {
       appBar: const SmartAppBar(
         title: 'Animations 🎬',
         variant: SmartAppBarVariant.glass,
-        enableAnimations: true,
         actions: [SmartAppBarAction.add, SmartAppBarAction.favorite],
       ),
       body: ListView(
@@ -779,15 +771,14 @@ class AnimationScreen extends StatelessWidget {
 }
 
 class _AnimationCard extends StatelessWidget {
-  final String title;
-  final String description;
-  final Widget child;
-
   const _AnimationCard({
     required this.title,
     required this.description,
     required this.child,
   });
+  final String title;
+  final String description;
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {
@@ -858,7 +849,7 @@ class _SlideAnimationDemoState extends State<_SlideAnimationDemo>
       vsync: this,
     );
     _animation = Tween<Offset>(
-      begin: const Offset(-1.0, 0.0),
+      begin: const Offset(-1, 0),
       end: Offset.zero,
     ).animate(CurvedAnimation(
       parent: _controller,
@@ -985,7 +976,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
         title: _customTitle,
         isLoading: _isLoading,
         loadingIcon: Icons.refresh,
-        actions: [SmartAppBarAction.settings, SmartAppBarAction.more],
+        actions: const [SmartAppBarAction.settings, SmartAppBarAction.more],
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
@@ -1067,15 +1058,15 @@ class AdvancedScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: SmartAppBar(
+      appBar: const SmartAppBar(
         title: 'Advanced Options ⚙️',
         variant: SmartAppBarVariant.elevated,
-        elevation: 8.0,
+        elevation: 8,
         blurIntensity: 0.3,
         enableGradient: true,
         backgroundColor: Colors.purple,
         foregroundColor: Colors.white,
-        titlePadding: const EdgeInsets.symmetric(horizontal: 16),
+        titlePadding: EdgeInsets.symmetric(horizontal: 16),
         automaticallyImplyLeading: false,
         actions: [
           SmartAppBarAction.search,
@@ -1116,15 +1107,14 @@ class AdvancedScreen extends StatelessWidget {
 }
 
 class _AdvancedFeatureCard extends StatelessWidget {
-  final String title;
-  final String description;
-  final Widget child;
-
   const _AdvancedFeatureCard({
     required this.title,
     required this.description,
     required this.child,
   });
+  final String title;
+  final String description;
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {
@@ -1152,7 +1142,7 @@ class _ElevationDemo extends StatefulWidget {
 }
 
 class _ElevationDemoState extends State<_ElevationDemo> {
-  double _elevation = 4.0;
+  double _elevation = 4;
 
   @override
   Widget build(BuildContext context) {
@@ -1177,7 +1167,6 @@ class _ElevationDemoState extends State<_ElevationDemo> {
         const SizedBox(height: 8),
         Slider(
           value: _elevation,
-          min: 0,
           max: 20,
           divisions: 20,
           label: _elevation.toStringAsFixed(1),
@@ -1223,8 +1212,6 @@ class _BlurDemoState extends State<_BlurDemo> {
         const SizedBox(height: 8),
         Slider(
           value: _blurIntensity,
-          min: 0,
-          max: 1,
           divisions: 10,
           label: '${(_blurIntensity * 100).toInt()}%',
           onChanged: (value) => setState(() => _blurIntensity = value),
@@ -1240,7 +1227,7 @@ class _PaddingDemo extends StatefulWidget {
 }
 
 class _PaddingDemoState extends State<_PaddingDemo> {
-  double _padding = 16.0;
+  double _padding = 16;
 
   @override
   Widget build(BuildContext context) {
@@ -1251,7 +1238,7 @@ class _PaddingDemoState extends State<_PaddingDemo> {
           color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.1),
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: _padding),
-            child: Align(
+            child: const Align(
               alignment: Alignment.centerLeft,
               child: Text('Custom Padding Demo'),
             ),
@@ -1260,7 +1247,6 @@ class _PaddingDemoState extends State<_PaddingDemo> {
         const SizedBox(height: 8),
         Slider(
           value: _padding,
-          min: 0,
           max: 40,
           divisions: 8,
           label: '${_padding.toInt()}px',
@@ -1294,21 +1280,21 @@ class GlassEffectScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       appBar: SmartAppBar(
         title: 'Glass Effect Demo ✨',
         variant: SmartAppBarVariant.glass,
         blurIntensity: 0.3,
         actions: [SmartAppBarAction.edit, SmartAppBarAction.share],
       ),
-      body: Container(
+      body: DecoratedBox(
         decoration: BoxDecoration(
           image: DecorationImage(
             image: NetworkImage('https://picsum.photos/800/600?blur=3'),
             fit: BoxFit.cover,
           ),
         ),
-        child: const Center(
+        child: Center(
           child: Card(
             margin: EdgeInsets.all(16),
             child: Padding(
@@ -1335,7 +1321,7 @@ class TransparentScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       extendBodyBehindAppBar: true,
       appBar: SmartAppBar(
         title: 'Transparent AppBar 🌟',
@@ -1343,8 +1329,8 @@ class TransparentScreen extends StatelessWidget {
         foregroundColor: Colors.white,
         actions: [SmartAppBarAction.search, SmartAppBarAction.more],
       ),
-      body: Container(
-        decoration: const BoxDecoration(
+      body: DecoratedBox(
+        decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -1354,7 +1340,7 @@ class TransparentScreen extends StatelessWidget {
             ],
           ),
         ),
-        child: const Center(
+        child: Center(
           child: Text(
             'Transparent AppBar Demo',
             style: TextStyle(
@@ -1379,7 +1365,7 @@ class BorderedScreen extends StatelessWidget {
         title: 'Bordered AppBar 📋',
         variant: SmartAppBarVariant.bordered,
         backgroundColor: Colors.grey[50],
-        actions: [SmartAppBarAction.search, SmartAppBarAction.settings],
+        actions: const [SmartAppBarAction.search, SmartAppBarAction.settings],
       ),
       body: ListView(
         padding: const EdgeInsets.all(16),
@@ -1416,9 +1402,12 @@ class ElevatedScreen extends StatelessWidget {
       appBar: SmartAppBar(
         title: 'Elevated AppBar ⬆️',
         variant: SmartAppBarVariant.elevated,
-        elevation: 8.0,
+        elevation: 8,
         backgroundColor: Colors.blue[50],
-        actions: [SmartAppBarAction.notifications, SmartAppBarAction.profile],
+        actions: const [
+          SmartAppBarAction.notifications,
+          SmartAppBarAction.profile
+        ],
       ),
       body: ListView(
         padding: const EdgeInsets.all(16),
@@ -1459,7 +1448,7 @@ class LargeAppBarScreen extends StatelessWidget {
         backgroundColor: Colors.purple[100],
         centerTitle: true,
         automaticallyImplyLeading: false,
-        actions: [SmartAppBarAction.share, SmartAppBarAction.bookmark],
+        actions: const [SmartAppBarAction.share, SmartAppBarAction.bookmark],
       ),
       body: ListView(
         padding: const EdgeInsets.all(16),
